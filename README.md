@@ -146,3 +146,16 @@ Este projeto é destinado exclusivamente para fins educacionais.
 **Desenvolvido por** Carlos Eduardo Braga  
 **Turma MIDS 77** - Curso de Desenvolvimento de Sistemas  
 **Professor**: Vinícius Trindade
+
+## 📋 Documentação do Projeto
+
+Para mais informações sobre este projeto, consulte:
+
+- **[CHANGELOG.md](CHANGELOG.md)** - Histórico de mudanças e versões
+- **[LICENSE](LICENSE)** - Licença educacional do projeto
+- **[CONTRIBUTING.md](CONTRIBUTING.md)** - Guia para contribuições
+- **[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)** - Código de conduta da comunidade
+
+---
+
+*Última atualização: Agosto 2025*
