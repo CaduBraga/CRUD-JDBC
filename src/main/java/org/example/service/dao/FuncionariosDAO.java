@@ -99,7 +99,6 @@ public class FuncionariosDAO {
         return false;
     }
 
-    // Exercício 10: Atualizar salário com base no nome do funcionário
     public boolean atualizarSalario(String nome, double novoSalario) {
         String sql = "UPDATE funcionarios SET salario = ? WHERE nome = ?";
 
@@ -123,7 +122,6 @@ public class FuncionariosDAO {
         return false;
     }
 
-    // Exercício 15: Deletar funcionário por nome
     public boolean deletarFuncionario(String nome) {
         String sql = "DELETE FROM funcionarios WHERE nome = ?";
 

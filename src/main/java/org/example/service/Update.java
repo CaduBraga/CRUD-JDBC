@@ -1,8 +1,10 @@
 package org.example.service;
 
+import org.example.config.Conexao;
 import org.example.service.dao.*;
 
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.util.Scanner;
 
 public class Update {

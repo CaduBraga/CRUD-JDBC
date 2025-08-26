@@ -10,10 +10,6 @@ import org.example.service.dao.PedidosDAO;
 import org.example.service.dao.ProdutosDAO;
 import org.example.service.dao.UsuarioDAO;
 
-/**
- * Classe para demonstrar todos os exercícios práticos implementados
- * com PreparedStatement para operações de UPDATE, DELETE e SELECT
- */
 public class ExerciciosPraticos {
     
     private static final Scanner input = new Scanner(System.in);
@@ -24,7 +20,7 @@ public class ExerciciosPraticos {
         while (true) {
             exibirMenu();
             int opcao = input.nextInt();
-            input.nextLine(); // Consumir quebra de linha
+            input.nextLine();
             
             if (opcao == 0) {
                 System.out.println("Saindo...");
@@ -81,212 +77,7 @@ public class ExerciciosPraticos {
             default -> System.out.println("Opção inválida!");
         }
     }
-    
-    // Exercício 6: Atualizar curso de um aluno
-    private static void exercicioAtualizarCursoAluno() {
-        System.out.println("\n--- Atualizar Curso de um Aluno ---");
-        System.out.print("Digite a matrícula do aluno: ");
-        String matricula = input.nextLine();
-        System.out.print("Digite o novo curso: ");
-        String novoCurso = input.nextLine();
-        
-        AlunoDAO alunoDAO = new AlunoDAO();
-        boolean sucesso = alunoDAO.atualizarCurso(matricula, novoCurso);
-        
-        if (sucesso) {
-            System.out.println("✅ Curso atualizado com sucesso!");
-        } else {
-            System.out.println("❌ Falha ao atualizar curso.");
-        }
-    }
-    
-    // Exercício 7: Atualizar preço de um produto
-    private static void exercicioAtualizarPrecoProduto() {
-        System.out.println("\n--- Atualizar Preço de um Produto ---");
-        System.out.print("Digite o nome do produto: ");
-        String nome = input.nextLine();
-        System.out.print("Digite o novo preço: ");
-        double novoPreco = input.nextDouble();
-        
-        ProdutosDAO produtosDAO = new ProdutosDAO();
-        boolean sucesso = produtosDAO.atualizarPreco(nome, novoPreco);
-        
-        if (sucesso) {
-            System.out.println("✅ Preço atualizado com sucesso!");
-        } else {
-            System.out.println("❌ Falha ao atualizar preço.");
-        }
-    }
-    
-    // Exercício 8: Atualizar valor total de um pedido
-    private static void exercicioAtualizarValorTotalPedido() {
-        System.out.println("\n--- Atualizar Valor Total de um Pedido ---");
-        System.out.print("Digite o ID do pedido: ");
-        int id = input.nextInt();
-        System.out.print("Digite o novo valor total: ");
-        double novoTotal = input.nextDouble();
-        
-        PedidosDAO pedidosDAO = new PedidosDAO();
-        boolean sucesso = pedidosDAO.atualizarValorTotal(id, novoTotal);
-        
-        if (sucesso) {
-            System.out.println("✅ Valor total atualizado com sucesso!");
-        } else {
-            System.out.println("❌ Falha ao atualizar valor total.");
-        }
-    }
-    
-    // Exercício 9: Atualizar autor de um livro
-    private static void exercicioAtualizarAutorLivro() {
-        System.out.println("\n--- Atualizar Autor de um Livro ---");
-        System.out.print("Digite o título do livro: ");
-        String titulo = input.nextLine();
-        System.out.print("Digite o novo autor: ");
-        String novoAutor = input.nextLine();
-        
-        LivrosDAO livrosDAO = new LivrosDAO();
-        boolean sucesso = livrosDAO.atualizarAutor(titulo, novoAutor);
-        
-        if (sucesso) {
-            System.out.println("✅ Autor atualizado com sucesso!");
-        } else {
-            System.out.println("❌ Falha ao atualizar autor.");
-        }
-    }
-    
-    // Exercício 10: Atualizar salário de um funcionário
-    private static void exercicioAtualizarSalarioFuncionario() {
-        System.out.println("\n--- Atualizar Salário de um Funcionário ---");
-        System.out.print("Digite o nome do funcionário: ");
-        String nome = input.nextLine();
-        System.out.print("Digite o novo salário: ");
-        double novoSalario = input.nextDouble();
-        
-        FuncionariosDAO funcionariosDAO = new FuncionariosDAO();
-        boolean sucesso = funcionariosDAO.atualizarSalario(nome, novoSalario);
-        
-        if (sucesso) {
-            System.out.println("✅ Salário atualizado com sucesso!");
-        } else {
-            System.out.println("❌ Falha ao atualizar salário.");
-        }
-    }
-    
-    // Exercício 8: Atualizar email de um usuário
-    private static void exercicioAtualizarEmailUsuario() {
-        System.out.println("\n--- Atualizar Email de um Usuário ---");
-        System.out.print("Digite o nome do usuário: ");
-        String nome = input.nextLine();
-        System.out.print("Digite o novo email: ");
-        String novoEmail = input.nextLine();
-        
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
-        boolean sucesso = usuarioDAO.atualizarEmail(nome, novoEmail);
-        
-        if (sucesso) {
-            System.out.println("✅ Email atualizado com sucesso!");
-        } else {
-            System.out.println("❌ Falha ao atualizar email.");
-        }
-    }
-    
-    // Exercício 11: Deletar aluno
-    private static void exercicioDeletarAluno() {
-        System.out.println("\n--- Deletar Aluno ---");
-        System.out.print("Digite a matrícula do aluno: ");
-        String matricula = input.nextLine();
-        
-        AlunoDAO alunoDAO = new AlunoDAO();
-        boolean sucesso = alunoDAO.deletarAluno(matricula);
-        
-        if (sucesso) {
-            System.out.println("✅ Aluno deletado com sucesso!");
-        } else {
-            System.out.println("❌ Falha ao deletar aluno.");
-        }
-    }
-    
-    // Exercício 12: Deletar produto
-    private static void exercicioDeletarProduto() {
-        System.out.println("\n--- Deletar Produto ---");
-        System.out.print("Digite o nome do produto: ");
-        String nome = input.nextLine();
-        
-        ProdutosDAO produtosDAO = new ProdutosDAO();
-        boolean sucesso = produtosDAO.deletarProduto(nome);
-        
-        if (sucesso) {
-            System.out.println("✅ Produto deletado com sucesso!");
-        } else {
-            System.out.println("❌ Falha ao deletar produto.");
-        }
-    }
-    
-    // Exercício 13: Deletar pedido
-    private static void exercicioDeletarPedido() {
-        System.out.println("\n--- Deletar Pedido ---");
-        System.out.print("Digite o ID do pedido: ");
-        int id = input.nextInt();
-        
-        PedidosDAO pedidosDAO = new PedidosDAO();
-        boolean sucesso = pedidosDAO.delete(id);
-        
-        if (sucesso) {
-            System.out.println("✅ Pedido deletado com sucesso!");
-        } else {
-            System.out.println("❌ Falha ao deletar pedido.");
-        }
-    }
-    
-    // Exercício 14: Deletar livro
-    private static void exercicioDeletarLivro() {
-        System.out.println("\n--- Deletar Livro ---");
-        System.out.print("Digite o título do livro: ");
-        String titulo = input.nextLine();
-        
-        LivrosDAO livrosDAO = new LivrosDAO();
-        boolean sucesso = livrosDAO.deletarLivro(titulo);
-        
-        if (sucesso) {
-            System.out.println("✅ Livro deletado com sucesso!");
-        } else {
-            System.out.println("❌ Falha ao deletar livro.");
-        }
-    }
-    
-    // Exercício 15: Deletar funcionário
-    private static void exercicioDeletarFuncionario() {
-        System.out.println("\n--- Deletar Funcionário ---");
-        System.out.print("Digite o nome do funcionário: ");
-        String nome = input.nextLine();
-        
-        FuncionariosDAO funcionariosDAO = new FuncionariosDAO();
-        boolean sucesso = funcionariosDAO.deletarFuncionario(nome);
-        
-        if (sucesso) {
-            System.out.println("✅ Funcionário deletado com sucesso!");
-        } else {
-            System.out.println("❌ Falha ao deletar funcionário.");
-        }
-    }
-    
-    // Exercício 12: Deletar usuário
-    private static void exercicioDeletarUsuario() {
-        System.out.println("\n--- Deletar Usuário ---");
-        System.out.print("Digite o nome do usuário: ");
-        String nome = input.nextLine();
-        
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
-        boolean sucesso = usuarioDAO.deletarUsuario(nome);
-        
-        if (sucesso) {
-            System.out.println("✅ Usuário deletado com sucesso!");
-        } else {
-            System.out.println("❌ Falha ao deletar usuário.");
-        }
-    }
-    
-    // Atividade 1: Listar todos os usuários
+
     private static void exercicioListarUsuarios() {
         System.out.println("\n--- Listar Todos os Usuários ---");
         
@@ -301,8 +92,7 @@ public class ExerciciosPraticos {
             }
         }
     }
-    
-    // Atividade 2: Buscar usuário por ID
+
     private static void exercicioBuscarUsuarioPorId() {
         System.out.println("\n--- Buscar Usuário por ID ---");
         System.out.print("Digite o ID do usuário: ");
@@ -317,8 +107,7 @@ public class ExerciciosPraticos {
             System.out.println("Usuário não encontrado.");
         }
     }
-    
-    // Atividade 3: Filtrar usuários por domínio de email
+
     private static void exercicioFiltrarUsuariosPorDominio() {
         System.out.println("\n--- Filtrar Usuários por Domínio de Email ---");
         System.out.print("Digite o domínio (ex: @email.com): ");
@@ -335,12 +124,203 @@ public class ExerciciosPraticos {
             }
         }
     }
-    
-    // Atividade 4: Contar total de usuários
+
     private static void exercicioContarUsuarios() {
         System.out.println("\n--- Contar Total de Usuários ---");
         
         int total = UsuarioDAO.contarUsuarios();
         System.out.println("Total de usuários cadastrados: " + total);
+    }
+
+    private static void exercicioAtualizarCursoAluno() {
+        System.out.println("\n--- Atualizar Curso de um Aluno ---");
+        System.out.print("Digite a matrícula do aluno: ");
+        String matricula = input.nextLine();
+        System.out.print("Digite o novo curso: ");
+        String novoCurso = input.nextLine();
+
+        AlunoDAO alunoDAO = new AlunoDAO();
+        boolean sucesso = alunoDAO.atualizarCurso(matricula, novoCurso);
+
+        if (sucesso) {
+            System.out.println("✅ Curso atualizado com sucesso!");
+        } else {
+            System.out.println("❌ Falha ao atualizar curso.");
+        }
+    }
+
+    private static void exercicioAtualizarPrecoProduto() {
+        System.out.println("\n--- Atualizar Preço de um Produto ---");
+        System.out.print("Digite o nome do produto: ");
+        String nome = input.nextLine();
+        System.out.print("Digite o novo preço: ");
+        double novoPreco = input.nextDouble();
+
+        ProdutosDAO produtosDAO = new ProdutosDAO();
+        boolean sucesso = produtosDAO.atualizarPreco(nome, novoPreco);
+
+        if (sucesso) {
+            System.out.println("✅ Preço atualizado com sucesso!");
+        } else {
+            System.out.println("❌ Falha ao atualizar preço.");
+        }
+    }
+
+    private static void exercicioAtualizarValorTotalPedido() {
+        System.out.println("\n--- Atualizar Valor Total de um Pedido ---");
+        System.out.print("Digite o ID do pedido: ");
+        int id = input.nextInt();
+        System.out.print("Digite o novo valor total: ");
+        double novoTotal = input.nextDouble();
+
+        PedidosDAO pedidosDAO = new PedidosDAO();
+        boolean sucesso = pedidosDAO.atualizarValorTotal(id, novoTotal);
+
+        if (sucesso) {
+            System.out.println("✅ Valor total atualizado com sucesso!");
+        } else {
+            System.out.println("❌ Falha ao atualizar valor total.");
+        }
+    }
+
+    private static void exercicioAtualizarAutorLivro() {
+        System.out.println("\n--- Atualizar Autor de um Livro ---");
+        System.out.print("Digite o título do livro: ");
+        String titulo = input.nextLine();
+        System.out.print("Digite o novo autor: ");
+        String novoAutor = input.nextLine();
+
+        LivrosDAO livrosDAO = new LivrosDAO();
+        boolean sucesso = livrosDAO.atualizarAutor(titulo, novoAutor);
+
+        if (sucesso) {
+            System.out.println("✅ Autor atualizado com sucesso!");
+        } else {
+            System.out.println("❌ Falha ao atualizar autor.");
+        }
+    }
+
+    private static void exercicioAtualizarSalarioFuncionario() {
+        System.out.println("\n--- Atualizar Salário de um Funcionário ---");
+        System.out.print("Digite o nome do funcionário: ");
+        String nome = input.nextLine();
+        System.out.print("Digite o novo salário: ");
+        double novoSalario = input.nextDouble();
+
+        FuncionariosDAO funcionariosDAO = new FuncionariosDAO();
+        boolean sucesso = funcionariosDAO.atualizarSalario(nome, novoSalario);
+
+        if (sucesso) {
+            System.out.println("✅ Salário atualizado com sucesso!");
+        } else {
+            System.out.println("❌ Falha ao atualizar salário.");
+        }
+    }
+
+    private static void exercicioAtualizarEmailUsuario() {
+        System.out.println("\n--- Atualizar Email de um Usuário ---");
+        System.out.print("Digite o nome do usuário: ");
+        String nome = input.nextLine();
+        System.out.print("Digite o novo email: ");
+        String novoEmail = input.nextLine();
+
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        boolean sucesso = usuarioDAO.atualizarEmail(nome, novoEmail);
+
+        if (sucesso) {
+            System.out.println("✅ Email atualizado com sucesso!");
+        } else {
+            System.out.println("❌ Falha ao atualizar email.");
+        }
+    }
+
+    private static void exercicioDeletarAluno() {
+        System.out.println("\n--- Deletar Aluno ---");
+        System.out.print("Digite a matrícula do aluno: ");
+        String matricula = input.nextLine();
+
+        AlunoDAO alunoDAO = new AlunoDAO();
+        boolean sucesso = alunoDAO.deletarAluno(matricula);
+
+        if (sucesso) {
+            System.out.println("✅ Aluno deletado com sucesso!");
+        } else {
+            System.out.println("❌ Falha ao deletar aluno.");
+        }
+    }
+
+    private static void exercicioDeletarProduto() {
+        System.out.println("\n--- Deletar Produto ---");
+        System.out.print("Digite o nome do produto: ");
+        String nome = input.nextLine();
+
+        ProdutosDAO produtosDAO = new ProdutosDAO();
+        boolean sucesso = produtosDAO.deletarProduto(nome);
+
+        if (sucesso) {
+            System.out.println("✅ Produto deletado com sucesso!");
+        } else {
+            System.out.println("❌ Falha ao deletar produto.");
+        }
+    }
+
+    private static void exercicioDeletarPedido() {
+        System.out.println("\n--- Deletar Pedido ---");
+        System.out.print("Digite o ID do pedido: ");
+        int id = input.nextInt();
+
+        PedidosDAO pedidosDAO = new PedidosDAO();
+        boolean sucesso = pedidosDAO.delete(id);
+
+        if (sucesso) {
+            System.out.println("✅ Pedido deletado com sucesso!");
+        } else {
+            System.out.println("❌ Falha ao deletar pedido.");
+        }
+    }
+
+    private static void exercicioDeletarLivro() {
+        System.out.println("\n--- Deletar Livro ---");
+        System.out.print("Digite o título do livro: ");
+        String titulo = input.nextLine();
+
+        LivrosDAO livrosDAO = new LivrosDAO();
+        boolean sucesso = livrosDAO.deletarLivro(titulo);
+
+        if (sucesso) {
+            System.out.println("✅ Livro deletado com sucesso!");
+        } else {
+            System.out.println("❌ Falha ao deletar livro.");
+        }
+    }
+
+    private static void exercicioDeletarFuncionario() {
+        System.out.println("\n--- Deletar Funcionário ---");
+        System.out.print("Digite o nome do funcionário: ");
+        String nome = input.nextLine();
+
+        FuncionariosDAO funcionariosDAO = new FuncionariosDAO();
+        boolean sucesso = funcionariosDAO.deletarFuncionario(nome);
+
+        if (sucesso) {
+            System.out.println("✅ Funcionário deletado com sucesso!");
+        } else {
+            System.out.println("❌ Falha ao deletar funcionário.");
+        }
+    }
+
+    private static void exercicioDeletarUsuario() {
+        System.out.println("\n--- Deletar Usuário ---");
+        System.out.print("Digite o nome do usuário: ");
+        String nome = input.nextLine();
+
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        boolean sucesso = usuarioDAO.deletarUsuario(nome);
+
+        if (sucesso) {
+            System.out.println("✅ Usuário deletado com sucesso!");
+        } else {
+            System.out.println("❌ Falha ao deletar usuário.");
+        }
     }
 }

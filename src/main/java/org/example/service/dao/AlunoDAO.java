@@ -94,7 +94,6 @@ public class AlunoDAO {
         return false;
     }
 
-    // Exercício 6: Atualizar curso de um aluno com base na matrícula
     public boolean atualizarCurso(String matricula, String novoCurso) {
         String sql = "UPDATE alunos SET curso = ? WHERE matricula = ?";
 
@@ -118,7 +117,6 @@ public class AlunoDAO {
         return false;
     }
 
-    // Exercício 11: Deletar aluno por matrícula
     public boolean deletarAluno(String matricula) {
         String sql = "DELETE FROM alunos WHERE matricula = ?";
 

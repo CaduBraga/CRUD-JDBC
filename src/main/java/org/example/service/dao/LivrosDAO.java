@@ -99,7 +99,6 @@ public class LivrosDAO {
         return false;
     }
 
-    // Exercício 9: Atualizar autor de um livro com base no título
     public boolean atualizarAutor(String titulo, String novoAutor) {
         String sql = "UPDATE livros SET autor = ? WHERE titulo = ?";
 
@@ -123,7 +122,6 @@ public class LivrosDAO {
         return false;
     }
 
-    // Exercício 14: Deletar livro por título
     public boolean deletarLivro(String titulo) {
         String sql = "DELETE FROM livros WHERE titulo = ?";
 

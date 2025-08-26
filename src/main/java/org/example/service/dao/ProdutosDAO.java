@@ -99,7 +99,6 @@ public class ProdutosDAO {
         return false;
     }
 
-    // Exercício 7: Atualizar preço de um produto com base no nome
     public boolean atualizarPreco(String nome, double novoPreco) {
         String sql = "UPDATE produtos SET preco = ? WHERE nome = ?";
 
@@ -123,7 +122,6 @@ public class ProdutosDAO {
         return false;
     }
 
-    // Exercício 12: Deletar produto por nome
     public boolean deletarProduto(String nome) {
         String sql = "DELETE FROM produtos WHERE nome = ?";
 

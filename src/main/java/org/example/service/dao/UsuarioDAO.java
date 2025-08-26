@@ -75,7 +75,6 @@ public class UsuarioDAO {
         return false;
     }
 
-    // Exercício 8: Atualizar email de um usuário por nome
     public boolean atualizarEmail(String nome, String novoEmail) {
         String sql = "UPDATE usuarios SET email = ? WHERE nome = ?";
 
@@ -122,7 +121,6 @@ public class UsuarioDAO {
         return false;
     }
 
-    // Exercício 12: Deletar usuário por nome
     public boolean deletarUsuario(String nome) {
         String sql = "DELETE FROM usuarios WHERE nome = ?";
 
@@ -145,7 +143,6 @@ public class UsuarioDAO {
         return false;
     }
 
-    // Atividade 1: Listar todos os usuários
     public static List<Usuario> listar() {
         String sql = "SELECT id, nome, email FROM usuarios";
         List<Usuario> usuarios = new ArrayList<>();
@@ -169,7 +166,6 @@ public class UsuarioDAO {
         return usuarios;
     }
 
-    // Atividade 2: Buscar um usuário por ID
     public static Usuario listarPorId(int id) {
         String sql = "SELECT id, nome, email FROM usuarios WHERE id = ?";
         int newId = 0;
@@ -196,7 +192,6 @@ public class UsuarioDAO {
         return new Usuario(newId, nome, email);
     }
 
-    // Atividade 3: Exibir usuários com emails de um domínio específico
     public static List<Usuario> listarPorDominio(String dominio) {
         String sql = "SELECT id, nome, email FROM usuarios WHERE email LIKE ?";
         List<Usuario> usuarios = new ArrayList<>();
@@ -221,7 +216,6 @@ public class UsuarioDAO {
         return usuarios;
     }
 
-    // Atividade 4: Contar quantos usuários estão cadastrados
     public static int contarUsuarios() {
         String sql = "SELECT COUNT(*) FROM usuarios";
         int count = 0;
@@ -240,7 +234,6 @@ public class UsuarioDAO {
         return count;
     }
 
-    // Classe interna para representar um usuário
     public static class Usuario {
         private int id;
         private String nome;
