@@ -1,8 +1,14 @@
 package org.example.service.dao;
 
-import org.example.config.Conexao;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
-import java.sql.*;
+import org.example.config.Conexao;
 
 public class UsuarioDAO {
 
@@ -69,6 +75,30 @@ public class UsuarioDAO {
         return false;
     }
 
+    // Exercício 8: Atualizar email de um usuário por nome
+    public boolean atualizarEmail(String nome, String novoEmail) {
+        String sql = "UPDATE usuarios SET email = ? WHERE nome = ?";
+
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, novoEmail);
+            stmt.setString(2, nome);
+            int linhasAfetadas = stmt.executeUpdate();
+
+            if (linhasAfetadas > 0) {
+                System.out.println("Email atualizado com sucesso!");
+                return true;
+            } else {
+                System.out.println("Nenhum usuário encontrado com o nome especificado.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public boolean delete(int id) {
         String sql = "DELETE FROM usuarios WHERE id = ?";
 
@@ -90,5 +120,145 @@ public class UsuarioDAO {
         }
 
         return false;
+    }
+
+    // Exercício 12: Deletar usuário por nome
+    public boolean deletarUsuario(String nome) {
+        String sql = "DELETE FROM usuarios WHERE nome = ?";
+
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, nome);
+            int linhasAfetadas = stmt.executeUpdate();
+
+            if (linhasAfetadas > 0) {
+                System.out.println("Usuário deletado com sucesso!");
+                return true;
+            } else {
+                System.out.println("Nenhum usuário encontrado com o nome especificado.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    // Atividade 1: Listar todos os usuários
+    public static List<Usuario> listar() {
+        String sql = "SELECT id, nome, email FROM usuarios";
+        List<Usuario> usuarios = new ArrayList<>();
+        
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String nome = rs.getString("nome");
+                String email = rs.getString("email");
+
+                Usuario usuario = new Usuario(id, nome, email);
+                usuarios.add(usuario);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return usuarios;
+    }
+
+    // Atividade 2: Buscar um usuário por ID
+    public static Usuario listarPorId(int id) {
+        String sql = "SELECT id, nome, email FROM usuarios WHERE id = ?";
+        int newId = 0;
+        String nome = "";
+        String email = "";
+
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, id);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                newId = rs.getInt("id");
+                nome = rs.getString("nome");
+                email = rs.getString("email");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return new Usuario(newId, nome, email);
+    }
+
+    // Atividade 3: Exibir usuários com emails de um domínio específico
+    public static List<Usuario> listarPorDominio(String dominio) {
+        String sql = "SELECT id, nome, email FROM usuarios WHERE email LIKE ?";
+        List<Usuario> usuarios = new ArrayList<>();
+        
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, "%" + dominio);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String nome = rs.getString("nome");
+                String email = rs.getString("email");
+
+                Usuario usuario = new Usuario(id, nome, email);
+                usuarios.add(usuario);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return usuarios;
+    }
+
+    // Atividade 4: Contar quantos usuários estão cadastrados
+    public static int contarUsuarios() {
+        String sql = "SELECT COUNT(*) FROM usuarios";
+        int count = 0;
+        
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    // Classe interna para representar um usuário
+    public static class Usuario {
+        private int id;
+        private String nome;
+        private String email;
+
+        public Usuario(int id, String nome, String email) {
+            this.id = id;
+            this.nome = nome;
+            this.email = email;
+        }
+
+        public int getId() { return id; }
+        public String getNome() { return nome; }
+        public String getEmail() { return email; }
+
+        @Override
+        public String toString() {
+            return "Usuario{id=" + id + ", nome='" + nome + "', email='" + email + "'}";
+        }
     }
 }

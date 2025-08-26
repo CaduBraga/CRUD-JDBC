@@ -1,8 +1,13 @@
 package org.example.service.dao;
 
-import org.example.config.Conexao;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
-import java.sql.*;
+import org.example.config.Conexao;
 
 public class PedidosDAO {
 
@@ -94,4 +99,31 @@ public class PedidosDAO {
 
         return false;
     }
+
+    // Exercício 8: Atualizar valor total de um pedido com base no ID
+    public boolean atualizarValorTotal(int id, double novoTotal) {
+        String sql = "UPDATE pedidos SET total = ? WHERE id = ?";
+
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setDouble(1, novoTotal);
+            stmt.setInt(2, id);
+            int linhasAfetadas = stmt.executeUpdate();
+
+            if (linhasAfetadas > 0) {
+                System.out.println("Valor total atualizado com sucesso!");
+                return true;
+            } else {
+                System.out.println("Nenhum pedido encontrado com o ID especificado.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    // Exercício 13: Deletar pedido por ID (já implementado acima, mas vou adicionar comentário)
+    // O método delete(int id) já implementa esta funcionalidade
 }

@@ -1,38 +1,52 @@
-# 🎓 CRUD-JDBC - Sistema de Gerenciamento com Java
+# CRUD-JDBC com PreparedStatement
 
-## 📚 Sobre o Projeto
+Sistema CRUD completo em Java utilizando JDBC com PreparedStatement para operações seguras no banco de dados.
 
-Este projeto foi desenvolvido com fins de aprendizagem para o **Curso de Desenvolvimento de Sistemas da Turma MIDS 77**, na matéria de **Programação Back-end**. 
+## Funcionalidades Implementadas
 
-### 👨‍🏫 Professor Responsável
-**Vinícius Trindade** - [Repositório de Referência](https://github.com/viiniciustrindade/java-jdbc.git)
+### Sistema CRUD Principal
+- **Create**: Inserir registros nas tabelas
+- **Read**: Visualizar registros das tabelas
+- **Update**: Atualizar registros existentes
+- **Delete**: Remover registros das tabelas
 
-### 🎯 Objetivos do Projeto
-- Implementar operações **CRUD** (Create, Read, Update, Delete) utilizando **JDBC** (Java Database Connectivity)
-- Aplicar o padrão de arquitetura **MVC** (Model-View-Controller) como adicional ao projeto base
-- Praticar conexão com banco de dados **MySQL** através de Java
-- Desenvolver habilidades em programação orientada a objetos e manipulação de dados
+### Exercícios Práticos com PreparedStatement
 
-## 🏗️ Arquitetura do Projeto
+#### Exercícios de Atualização (UPDATE)
+1. **Exercício 6**: Atualizar curso de um aluno com base na matrícula
+2. **Exercício 7**: Atualizar preço de um produto com base no nome
+3. **Exercício 8**: Atualizar valor total de um pedido com base no ID
+4. **Exercício 9**: Atualizar autor de um livro com base no título
+5. **Exercício 10**: Atualizar salário de um funcionário com base no nome
 
-### Padrão MVC Implementado
-- **Model**: Classes DAO (Data Access Object) para acesso aos dados
-- **View**: Interface de usuário via console (`MainView.java`)
-- **Controller/Service**: Classes de serviço que coordenam as operações (`Gerenciamento.java`, `Create.java`, `Read.java`, `Update.java`, `Delete.java`)
+#### Exercícios de Deleção (DELETE)
+6. **Exercício 11**: Deletar aluno com base na matrícula
+7. **Exercício 12**: Deletar produto com base no nome
+8. **Exercício 13**: Deletar pedido com base no ID
+9. **Exercício 14**: Deletar livro com base no título
+10. **Exercício 15**: Deletar funcionário com base no nome
 
-### Estrutura de Pacotes
+#### Atividades Práticas com SELECT
+11. **Atividade 1**: Listar todos os usuários
+12. **Atividade 2**: Buscar um usuário por ID
+13. **Atividade 3**: Exibir usuários com emails de um domínio específico
+14. **Atividade 4**: Contar quantos usuários estão cadastrados
+
+## Estrutura do Projeto
+
 ```
 src/main/java/org/example/
 ├── config/
 │   └── Conexao.java          # Configuração de conexão com banco
 ├── main/
-│   └── Main.java             # Ponto de entrada da aplicação
+│   ├── Main.java             # Classe principal com menu de opções
+│   └── ExerciciosPraticos.java # Demonstração dos exercícios
 ├── service/
-│   ├── Gerenciamento.java    # Controlador principal
 │   ├── Create.java           # Operações de criação
 │   ├── Read.java             # Operações de leitura
 │   ├── Update.java           # Operações de atualização
-│   ├── Delete.java           # Operações de exclusão
+│   ├── Delete.java           # Operações de deleção
+│   ├── Gerenciamento.java    # Gerenciador principal
 │   └── dao/                  # Data Access Objects
 │       ├── AlunoDAO.java
 │       ├── FuncionariosDAO.java
@@ -41,121 +55,86 @@ src/main/java/org/example/
 │       ├── ProdutosDAO.java
 │       └── UsuarioDAO.java
 └── view/
-    └── MainView.java         # Interface do usuário
+    └── MainView.java         # Interface de usuário
 ```
 
-## 🗄️ Banco de Dados
+## Como Executar
 
-### Configuração
-- **SGBD**: MySQL
-- **Banco**: MYSQLTESTE
-- **Conector**: MySQL Connector/J 8.0.33
+### 1. Configuração do Banco
+- Execute o script `resources/db/database.sql` no seu banco MySQL
+- Configure a conexão em `src/main/java/org/example/config/Conexao.java`
 
-### Tabelas Implementadas
-1. **usuarios** - Gerenciamento de usuários
-2. **alunos** - Cadastro de estudantes
-3. **produtos** - Controle de produtos
-4. **pedidos** - Gestão de pedidos
-5. **livros** - Biblioteca de livros
-6. **funcionarios** - Cadastro de funcionários
-
-## 🚀 Como Executar
-
-### Pré-requisitos
-- Java 22 ou superior
-- Maven 3.6+
-- MySQL Server
-- MySQL Connector/J
-
-### Configuração do Banco
-1. Execute o script SQL em `resources/db/database.sql`
-2. Configure as credenciais em `src/main/java/org/example/config/Conexao.java`
-
-### Executando o Projeto
+### 2. Compilação e Execução
 ```bash
-# Clone o repositório
-git clone [URL_DO_REPOSITORIO]
-
-# Navegue até o diretório
-cd CRUD-JDBC
-
-# Compile o projeto
+# Compilar o projeto
 mvn compile
 
-# Execute a aplicação
+# Executar
 mvn exec:java -Dexec.mainClass="org.example.main.Main"
 ```
 
-## 💻 Funcionalidades
+### 3. Menu Principal
+Ao executar, você verá:
+```
+=== SISTEMA CRUD-JDBC ===
+Escolha uma opção:
+1. Sistema CRUD Principal
+2. Exercícios Práticos com PreparedStatement
+```
 
-### Menu Principal
-O sistema apresenta um menu interativo com as seguintes opções:
+## Exemplos de Uso
 
-1. **Seleção de Tabela**
-   - Alunos
-   - Funcionários
-   - Livros
-   - Pedidos
-   - Produtos
-   - Usuários
+### Atualizar Email de Usuário
+```java
+UsuarioDAO usuarioDAO = new UsuarioDAO();
+boolean sucesso = usuarioDAO.atualizarEmail("Ana Souza", "ana.nova@email.com");
+```
 
-2. **Operações CRUD**
-   - **Create**: Inserir novos registros
-   - **Read**: Consultar registros existentes
-   - **Update**: Atualizar dados
-   - **Delete**: Remover registros
+### Deletar Produto por Nome
+```java
+ProdutosDAO produtosDAO = new ProdutosDAO();
+boolean sucesso = produtosDAO.deletarProduto("Produto A");
+```
 
-## 🛠️ Tecnologias Utilizadas
+### Listar Usuários por Domínio
+```java
+List<UsuarioDAO.Usuario> usuarios = UsuarioDAO.listarPorDominio("@email.com");
+for (UsuarioDAO.Usuario usuario : usuarios) {
+    System.out.println(usuario);
+}
+```
 
-- **Java 22** - Linguagem de programação
-- **Maven** - Gerenciamento de dependências
-- **MySQL** - Banco de dados
-- **JDBC** - API para conexão com banco de dados
-- **PreparedStatement** - Prevenção de SQL Injection
+### Contar Total de Usuários
+```java
+int total = UsuarioDAO.contarUsuarios();
+System.out.println("Total: " + total);
+```
 
-## 📋 Características Técnicas
+## Características dos Exercícios
 
-### Segurança
-- Uso de `PreparedStatement` para prevenir SQL Injection
-- Validação de entrada de dados
-- Tratamento de exceções
+- **PreparedStatement**: Todos os métodos utilizam PreparedStatement para segurança
+- **Tratamento de Erros**: Implementação robusta com try-catch e mensagens informativas
+- **Validação**: Verificação de linhas afetadas para confirmar operações
+- **Interface Amigável**: Menu interativo para testar todas as funcionalidades
+- **Código Limpo**: Implementação seguindo boas práticas de programação
 
-### Boas Práticas
-- Separação de responsabilidades (MVC)
-- Código modular e reutilizável
-- Documentação clara
-- Tratamento adequado de recursos (try-with-resources)
+## Tabelas do Banco
 
-## 🎓 Aprendizados
+- **usuarios**: id, nome, email
+- **alunos**: id, nome, matricula, curso
+- **funcionarios**: id, nome, cargo, salario
+- **livros**: id, titulo, autor, ano_publicacao
+- **pedidos**: id, cliente, data_pedido, total
+- **produtos**: id, nome, preco, quantidade
 
-Este projeto proporcionou o desenvolvimento das seguintes competências:
+## Dados de Teste
 
-- **JDBC**: Conexão e manipulação de banco de dados
-- **CRUD**: Operações básicas de persistência
-- **MVC**: Arquitetura de software
-- **MySQL**: Linguagem SQL e gerenciamento de dados
-- **Java**: Programação orientada a objetos
-- **Maven**: Gerenciamento de dependências
+O sistema inclui dados de teste na tabela `usuarios` com 10 registros para prática das operações.
 
-## 📝 Licença
+## Contribuição
 
-Este projeto é destinado exclusivamente para fins educacionais.
+Siga as diretrizes do arquivo `CONTRIBUTING.md` para contribuir com o projeto.
 
----
+## Licença
 
-**Desenvolvido por** Carlos Eduardo Braga  
-**Turma MIDS 77** - Curso de Desenvolvimento de Sistemas  
-**Professor**: Vinícius Trindade
-
-## 📋 Documentação do Projeto
-
-Para mais informações sobre este projeto, consulte:
-
-- **[CHANGELOG.md](CHANGELOG.md)** - Histórico de mudanças e versões
-- **[LICENSE](LICENSE)** - Licença educacional do projeto
-- **[CONTRIBUTING.md](CONTRIBUTING.md)** - Guia para contribuições
-- **[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)** - Código de conduta da comunidade
-
----
-
-*Última atualização: Agosto 2025*
+Este projeto está licenciado sob a licença especificada no arquivo `LICENSE`.

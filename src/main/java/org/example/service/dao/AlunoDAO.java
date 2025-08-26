@@ -1,11 +1,11 @@
 package org.example.service.dao;
 
-import org.example.config.Conexao;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import org.example.config.Conexao;
 
 public class AlunoDAO {
 
@@ -91,6 +91,53 @@ public class AlunoDAO {
             e.printStackTrace();
         }
 
+        return false;
+    }
+
+    // Exercício 6: Atualizar curso de um aluno com base na matrícula
+    public boolean atualizarCurso(String matricula, String novoCurso) {
+        String sql = "UPDATE alunos SET curso = ? WHERE matricula = ?";
+
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, novoCurso);
+            stmt.setString(2, matricula);
+            int linhasAfetadas = stmt.executeUpdate();
+
+            if (linhasAfetadas > 0) {
+                System.out.println("Curso atualizado com sucesso!");
+                return true;
+            } else {
+                System.out.println("Nenhum aluno encontrado com a matrícula especificada.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    // Exercício 11: Deletar aluno por matrícula
+    public boolean deletarAluno(String matricula) {
+        String sql = "DELETE FROM alunos WHERE matricula = ?";
+
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, matricula);
+            int linhasAfetadas = stmt.executeUpdate();
+
+            if (linhasAfetadas > 0) {
+                System.out.println("Aluno deletado com sucesso!");
+                return true;
+            } else {
+                System.out.println("Nenhum aluno encontrado com a matrícula especificada.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 }

@@ -1,8 +1,12 @@
 package org.example.service.dao;
 
-import org.example.config.Conexao;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
-import java.sql.*;
+import org.example.config.Conexao;
 
 public class FuncionariosDAO {
 
@@ -92,6 +96,53 @@ public class FuncionariosDAO {
             e.printStackTrace();
         }
 
+        return false;
+    }
+
+    // Exercício 10: Atualizar salário com base no nome do funcionário
+    public boolean atualizarSalario(String nome, double novoSalario) {
+        String sql = "UPDATE funcionarios SET salario = ? WHERE nome = ?";
+
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setDouble(1, novoSalario);
+            stmt.setString(2, nome);
+            int linhasAfetadas = stmt.executeUpdate();
+
+            if (linhasAfetadas > 0) {
+                System.out.println("Salário atualizado com sucesso!");
+                return true;
+            } else {
+                System.out.println("Nenhum funcionário encontrado com o nome especificado.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    // Exercício 15: Deletar funcionário por nome
+    public boolean deletarFuncionario(String nome) {
+        String sql = "DELETE FROM funcionarios WHERE nome = ?";
+
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, nome);
+            int linhasAfetadas = stmt.executeUpdate();
+
+            if (linhasAfetadas > 0) {
+                System.out.println("Funcionário deletado com sucesso!");
+                return true;
+            } else {
+                System.out.println("Nenhum funcionário encontrado com o nome especificado.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 }

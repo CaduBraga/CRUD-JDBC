@@ -1,8 +1,12 @@
 package org.example.service.dao;
 
-import org.example.config.Conexao;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
-import java.sql.*;
+import org.example.config.Conexao;
 
 public class ProdutosDAO {
 
@@ -92,6 +96,53 @@ public class ProdutosDAO {
             e.printStackTrace();
         }
 
+        return false;
+    }
+
+    // Exercício 7: Atualizar preço de um produto com base no nome
+    public boolean atualizarPreco(String nome, double novoPreco) {
+        String sql = "UPDATE produtos SET preco = ? WHERE nome = ?";
+
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setDouble(1, novoPreco);
+            stmt.setString(2, nome);
+            int linhasAfetadas = stmt.executeUpdate();
+
+            if (linhasAfetadas > 0) {
+                System.out.println("Preço atualizado com sucesso!");
+                return true;
+            } else {
+                System.out.println("Nenhum produto encontrado com o nome especificado.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    // Exercício 12: Deletar produto por nome
+    public boolean deletarProduto(String nome) {
+        String sql = "DELETE FROM produtos WHERE nome = ?";
+
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, nome);
+            int linhasAfetadas = stmt.executeUpdate();
+
+            if (linhasAfetadas > 0) {
+                System.out.println("Produto deletado com sucesso!");
+                return true;
+            } else {
+                System.out.println("Nenhum produto encontrado com o nome especificado.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 }
